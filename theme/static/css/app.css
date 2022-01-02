@@ -1,0 +1,144 @@
+/**
+ * Minified by jsDelivr using clean-css v4.2.3.
+ * Original file: /npm/modern-normalize@1.1.0/modern-normalize.css
+ *
+ * Do NOT use SRI with dynamically generated files! More information: https://www.jsdelivr.com/using-sri-with-dynamic-files
+ */
+/*! modern-normalize v1.1.0 | MIT License | https://github.com/sindresorhus/modern-normalize */
+*,::after,::before{box-sizing:border-box}html{-moz-tab-size:4;tab-size:4}html{line-height:1.15;-webkit-text-size-adjust:100%}body{margin:0}body{font-family:system-ui,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif,'Apple Color Emoji','Segoe UI Emoji'}hr{height:0;color:inherit}abbr[title]{text-decoration:underline dotted}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace,SFMono-Regular,Consolas,'Liberation Mono',Menlo,monospace;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit}button,input,optgroup,select,textarea{font-family:inherit;font-size:100%;line-height:1.15;margin:0}button,select{text-transform:none}[type=button],[type=reset],[type=submit],button{-webkit-appearance:button}::-moz-focus-inner{border-style:none;padding:0}:-moz-focusring{outline:1px dotted ButtonText}:-moz-ui-invalid{box-shadow:none}legend{padding:0}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}
+/*# sourceMappingURL=/sm/b8ae781793ee4eb86edef3f2a2ac43a5575d063ed8cd287d7553f9f1b2776616.map */
+
+@font-face {
+  font-family: Iosevka Mono;
+  src: url(/fonts/Iosevka-Mono.woff2) format('woff2'),url(/fonts/Iosevka-Mono.woff) format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap
+}
+
+:root {
+  --c-primary: #fe5819;
+  --c-gray: #bbb;
+  --container-w: 650px;
+  --font-size-sm: 0.875rem;
+  --font-mono: Iosevka Mono, monospace;
+  --font-sans: 'Inter', sans-serif;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: #151515;
+  padding: 2vh 0;
+  line-height: 1.6;
+}
+
+.container {
+  max-width: var(--container-w);
+  margin: 0 auto;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+pre, code {
+  font-family: var(--font-mono);
+}
+
+a {
+  color: var(--c-primary);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+p {
+  margin-bottom: 1.25rem
+}
+
+h1,h2,h3,h4,h5,h6 {
+  margin-bottom: 1.25rem
+}
+
+ol,ul {
+  padding: 0;
+  margin: 0 0 1.25rem 1.25rem;
+}
+
+ul li {
+  list-style: none;
+  position: relative;
+  padding-left: .75rem
+}
+
+ul li:before {
+  content: '-';
+  position: absolute;
+  left: 0
+}
+
+ol {
+  padding-left: 1rem
+}
+
+pre {
+  color: #777;
+  border: 1px solid #cfcfcf;
+  background: #fbfbfb;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+}
+
+p>code,
+li>code {
+  color: #777;
+  font-weight: 500;
+}
+
+.site-footer {
+  border-top: 1px solid #cfcfcf;
+  padding-top: 0.25rem;
+  margin-top: 2rem;
+  text-align: center;
+  font-size: var(--font-size-sm);
+  color: var(--c-gray);
+}
+
+.site-footer a {
+  color: var(--c-gray);
+  padding: 0 0.25rem;
+}
+
+.site-footer p {
+  margin: 0.5rem;
+}
+
+.post-list {
+  margin: 0;
+}
+
+.post-item {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 0.5rem;
+}
+
+.post-item:before {
+  display: none;;
+}
+
+.post-item a {
+  color: var(--c-primary);
+}
+
+.post-item div {
+  font-size: var(--font-size-sm);
+}
+
+.post-date {
+  color: var(--c-gray);
+}
