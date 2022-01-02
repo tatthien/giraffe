@@ -33,9 +33,15 @@
                     <a href="{{ .Permarlink }}">{{ .Title }}</a>
                     <div class="font-mono">
                         <span class="post-date">{{ .FormattedDate "Jan 02, 2006" }}</span>
+
+                        {{ $length := len .Tags }}
                         <span class="post-tags">
-                            {{ range .Tags }}
-                            <span>{{ . }}</span>
+                            {{ range $i, $t := .Tags }}
+                            {{ if lt $i $length }}
+                            <span>{{ $t }},</span>
+                            {{ else }}
+                            <span>{{ $t }}</span>
+                            {{ end }}
                             {{ end }}
                         </span>
                     </div>

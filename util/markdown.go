@@ -2,9 +2,12 @@ package util
 
 import (
 	"bytes"
+	"log"
 	"regexp"
 	"strings"
+	"time"
 
+	"github.com/mitchellh/mapstructure"
 	"github.com/spf13/viper"
 	"github.com/tatthien/giraffe/model"
 )
@@ -40,9 +43,15 @@ func GetFrontMatter(content string) (model.FrontMatter, string) {
 	viper.SetConfigType("yaml")
 	viper.ReadConfig(bytes.NewBuffer(yaml))
 
-	fm.Title = viper.GetString("title")
-	fm.Date = viper.GetTime("date")
-	fm.Tags = viper.GetStringSlice("tags")
+	err := viper.Unmarshal(&fm, func(dc *mapstructure.DecoderConfig) {
+		dc.DecodeHook = mapstructure.ComposeDecodeHookFunc(
+			mapstructure.StringToTimeHookFunc(time.RFC3339),
+			mapstructure.StringToSliceHookFunc(","),
+		)
+	})
+	if err != nil {
+		log.Println(err)
+	}
 
 	return fm, body
 }

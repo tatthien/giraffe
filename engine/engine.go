@@ -18,7 +18,7 @@ import (
 )
 
 type AppEngine struct {
-	AppConfig   Config
+	SiteConfig  SiteConfig
 	ContentDir  string
 	DistDir     string
 	TemplateDir string
@@ -36,7 +36,7 @@ func New() *AppEngine {
 	}
 
 	return &AppEngine{
-		AppConfig:   config,
+		SiteConfig:  config,
 		ContentDir:  "content",
 		DistDir:     "dist",
 		TemplateDir: "theme",
@@ -94,9 +94,9 @@ func (engine *AppEngine) GenerateIndexPage() {
 	sortedPosts := engine.Posts
 	sort.Sort(model.ByDate(sortedPosts))
 	data := struct {
-		Site  Config
+		Site  SiteConfig
 		Posts []model.Post
-	}{engine.AppConfig, sortedPosts}
+	}{engine.SiteConfig, sortedPosts}
 
 	err := engine.SaveAsHTML("index.html", "index.html", data)
 	if err != nil {

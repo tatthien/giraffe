@@ -18,9 +18,9 @@ type Post struct {
 type ByDate []Post
 
 type FrontMatter struct {
-	Title string
-	Date  time.Time
-	Tags  []string
+	Title string    `mapstructure:"title"`
+	Date  time.Time `mapstructure:"date"`
+	Tags  []string  `mapstructure:"tags"`
 }
 
 func (post *Post) Permarlink() string {
