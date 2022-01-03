@@ -1,33 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/css/app.css">
-    <title>{{ .Title }}</title>
-</head>
-
-<body>
-    <main class="container">
-        <a href="/" class="font-mono">cd ..</a>
-        <div>
-            <h1>{{ .Title }}</h1>
-            <div>{{ .Content }}</div>
-        </div>
-    </main>
-    <footer class="site-footer">
-        <p>Code is poetry</p>
-        <p>
-            <a href="https://v1.thien.dev" target="_blank">v1</a>
-            <a href="https://v2.thien.dev" target="_blank">v2</a>
-            <a href="https://v3.thien.dev" target="_blank">v3</a>
-        </p>
-    </footer>
-</body>
-
-</html>
+{{define "extra_head"}}{{end}}
+{{define "content"}}
+<main class="container">
+    <a href="/" class="font-mono">cd ..</a>
+    <div>
+        <h1>{{.Post.Title}}</h1>
+        <div>{{safe_html .Post.Content}}</div>
+    </div>
+</main>
+{{end}}
+{{define "extra_footer"}}{{end}}
+{{template "base.html" .}}

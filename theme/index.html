@@ -1,64 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
+{{define "extra_head"}}{{end}}
+{{define "content"}}
+<main>
+    <section id="hero" class="container">
+        <h1>Hey, I'm Thien</h1>
+        <p>I'm a software developer based in Ho Chi Minh city.</p>
+        <p>You can follow me on <a href="https://twitter.com/thisisthien" target="_blank">Twitter</a>, see my code
+            on <a href="https://github.com/tatthien" target="_blank">Github</a>. I occasionally <a
+                href="https://12bit.vn" target="_blank">blog</a>
+            too.</p>
+        <p>Outside of programming and helping my wife take care of our son, I enjoy playing soccer, collecting
+            mechanical keycaps.</p>
+    </section>
+    <section id="posts" class="container">
+        <ul class="post-list">
+            {{ range .Posts }}
+            {{ if eq .Type "posts"}}
+            <li class="post-item">
+                <a href="{{ .Permarlink }}">{{ .Title }}</a>
+                <div class="font-mono">
+                    <span class="post-date">{{ .FormattedDate "Jan 02, 2006" }}</span>
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/css/app.css">
-    <title>{{ .Site.Title }}</title>
-    <meta name="description" content="{{ .Site.Description }}">
-</head>
+                    <span class="post-tags">
+                        {{ join .Tags ", " }}
+                    </span>
+                </div>
+            </li>
+            {{ end }}
+            {{ end }}
+        </ul>
+    </section>
+</main>
+{{end}}
 
-<body>
-    <main>
-        <section id="hero" class="container">
-            <h1>Hey, I'm Thien</h1>
-            <p>I'm a software developer based in Ho Chi Minh city.</p>
-            <p>You can follow me on <a href="https://twitter.com/thisisthien" target="_blank">Twitter</a>, see my code
-                on <a href="https://github.com/tatthien" target="_blank">Github</a>. I occasionally <a
-                    href="https://12bit.vn" target="_blank">blog</a>
-                too.</p>
-            <p>Outside of programming and helping my wife take care of our son, I enjoy playing soccer, collecting
-                mechanical keycaps.</p>
-        </section>
-        <section id="posts" class="container">
-            <ul class="post-list">
-                {{ range .Posts }}
-                {{ if eq .Type "posts"}}
-                <li class="post-item">
-                    <a href="{{ .Permarlink }}">{{ .Title }}</a>
-                    <div class="font-mono">
-                        <span class="post-date">{{ .FormattedDate "Jan 02, 2006" }}</span>
+{{define "extra_footer"}}{{end}}
 
-                        {{ $length := len .Tags }}
-                        <span class="post-tags">
-                            {{ range $i, $t := .Tags }}
-                            {{ if lt $i $length }}
-                            <span>{{ $t }},</span>
-                            {{ else }}
-                            <span>{{ $t }}</span>
-                            {{ end }}
-                            {{ end }}
-                        </span>
-                    </div>
-                </li>
-                {{ end }}
-                {{ end }}
-            </ul>
-        </section>
-    </main>
-    <footer class="site-footer">
-        <p>Code is poetry</p>
-        <p>
-            <a href="https://v1.thien.dev" target="_blank">v1</a>
-            <a href="https://v2.thien.dev" target="_blank">v2</a>
-            <a href="https://v3.thien.dev" target="_blank">v3</a>
-        </p>
-    </footer>
-</body>
-
-</html>
+{{template "base.html" .}}

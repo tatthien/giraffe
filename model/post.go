@@ -2,14 +2,13 @@ package model
 
 import (
 	"fmt"
-	"html/template"
 	"time"
 )
 
 type Post struct {
 	Title   string
 	Date    time.Time
-	Content template.HTML
+	Content string
 	Slug    string
 	Type    string
 	Tags    []string

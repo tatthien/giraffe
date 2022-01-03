@@ -84,7 +84,7 @@ func (engine *AppEngine) ScanContent() {
 		if err != nil {
 			log.Println(err)
 		}
-		post.Content = template.HTML(buf.String())
+		post.Content = buf.String()
 
 		engine.Posts = append(engine.Posts, post)
 	}
@@ -93,10 +93,11 @@ func (engine *AppEngine) ScanContent() {
 func (engine *AppEngine) GenerateIndexPage() {
 	sortedPosts := engine.Posts
 	sort.Sort(model.ByDate(sortedPosts))
-	data := struct {
-		Site  SiteConfig
-		Posts []model.Post
-	}{engine.SiteConfig, sortedPosts}
+
+	data := map[string]interface{}{
+		"Posts":  sortedPosts,
+		"IsHome": true,
+	}
 
 	err := engine.SaveAsHTML("index.html", "index.html", data)
 	if err != nil {
@@ -109,7 +110,11 @@ func (engine *AppEngine) GenerateIndexPage() {
 func (engine *AppEngine) GenerateSingluarPages() {
 	for _, post := range engine.Posts {
 		fileName := fmt.Sprintf("%s/%s.html", post.Type, post.Slug)
-		err := engine.SaveAsHTML(fileName, "single.html", &post)
+		data := map[string]interface{}{
+			"Post":       post,
+			"IsSingular": true,
+		}
+		err := engine.SaveAsHTML(fileName, "single.html", data)
 		if err != nil {
 			log.Println(err)
 		} else {
@@ -118,15 +123,12 @@ func (engine *AppEngine) GenerateSingluarPages() {
 	}
 }
 
-func (engine *AppEngine) SaveAsHTML(fileName, templateName string, data interface{}) error {
-	tpl, err := template.ParseFiles(engine.TemplateDir + "/" + templateName)
-	if err != nil {
-		return err
-	}
+func (engine *AppEngine) SaveAsHTML(fileName, templateName string, data map[string]interface{}) error {
+	tpl := compileTemplate(templateName)
 
 	fullPath := engine.DistDir + "/" + fileName
 
-	err = util.CreateDir(filepath.Dir(fullPath))
+	err := util.CreateDir(filepath.Dir(fullPath))
 	if err != nil {
 		return err
 	}
@@ -137,7 +139,10 @@ func (engine *AppEngine) SaveAsHTML(fileName, templateName string, data interfac
 	}
 	defer f.Close()
 
-	return tpl.Execute(f, data)
+	// Add site config as global variable
+	data["Site"] = engine.SiteConfig
+
+	return tpl.ExecuteTemplate(f, templateName, data)
 }
 
 func (engine *AppEngine) CopyStaticFiles() {
@@ -184,4 +189,21 @@ func (engine *AppEngine) CopyStaticFiles() {
 			log.Println(err)
 		}
 	}
+}
+
+func compileTemplate(templateName string) *template.Template {
+	t := template.New("")
+
+	funcMap := template.FuncMap{
+		"safe_html": func(s string) template.HTML {
+			return template.HTML(s)
+		},
+		"join": func(a []string, sep string) string {
+			return strings.Join(a, sep)
+		},
+	}
+
+	t = template.Must(t.Funcs(funcMap).ParseGlob("theme/common/*.html"))
+
+	return template.Must(t.ParseFiles("theme/" + templateName))
 }
