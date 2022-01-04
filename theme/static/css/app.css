@@ -18,7 +18,7 @@
 
 :root {
   --c-primary: #fe5819;
-  --c-gray: #bbb;
+  --c-gray: #888;
   --container-w: 650px;
   --font-size-sm: 0.875rem;
   --font-mono: Iosevka Mono, monospace;
@@ -41,6 +41,18 @@ body {
 
 .font-mono {
   font-family: var(--font-mono);
+}
+
+.text-muted {
+  color: var(--c-gray);
+}
+
+.mb-1 {
+  margin-bottom: 0.25rem;
+}
+
+.mb-2 {
+  margin-bottom: 0.5rem;
 }
 
 pre, code {
@@ -139,6 +151,26 @@ li>code {
   font-size: var(--font-size-sm);
 }
 
+.post-item .post-tags {
+  margin-left: 0.75rem;
+}
+
 .post-date {
   color: var(--c-gray);
+}
+
+.post-meta {
+  margin: 3rem 0;
+  color: var(--c-gray);
+}
+
+.post-tags {
+  display: inline-flex;
+  gap: 0.25rem;
+}
+
+.post-tags a {
+  padding: 0 0.5rem;
+  border-radius: 0.25rem;
+  border: 1px solid var(--c-primary);
 }

@@ -22,7 +22,8 @@ type AppEngine struct {
 	ContentDir  string
 	DistDir     string
 	TemplateDir string
-	Posts       []model.Post
+	Posts       model.Posts
+	Tags        model.Tags
 }
 
 func New() *AppEngine {
@@ -79,6 +80,7 @@ func (engine *AppEngine) ScanContent() {
 		post.Date = fm.Date
 		post.Tags = fm.Tags
 
+		// @TODO: Move this to util
 		var buf bytes.Buffer
 		err = goldmark.Convert([]byte(body), &buf)
 		if err != nil {
@@ -87,6 +89,20 @@ func (engine *AppEngine) ScanContent() {
 		post.Content = buf.String()
 
 		engine.Posts = append(engine.Posts, post)
+	}
+
+	// Retrieve tags
+	for _, post := range engine.Posts {
+		for _, t := range post.Tags {
+			tag := engine.Tags.Find(t)
+
+			if tag.Name == "" {
+				tag.Name = t
+				tag.Slug = util.Slugify(t)
+
+				engine.Tags = append(engine.Tags, tag)
+			}
+		}
 	}
 }
 
@@ -119,6 +135,33 @@ func (engine *AppEngine) GenerateSingluarPages() {
 			log.Println(err)
 		} else {
 			log.Printf("generated: %s/%s.html\n", post.Type, post.Slug)
+		}
+	}
+}
+
+func (engine *AppEngine) GenerateTagIndexPage() {
+	// Generate tags.html
+	err := engine.SaveAsHTML("tags/index.html", "tags.html", map[string]interface{}{
+		"Tags": engine.Tags,
+	})
+	if err != nil {
+		log.Println(err)
+	}
+}
+
+func (engine *AppEngine) GenerateTagPages() {
+	for _, tag := range engine.Tags {
+		tag.Posts = engine.Posts.FindByTag(tag.Name)
+		fileName := fmt.Sprintf("tags/%s.html", tag.Slug)
+		data := map[string]interface{}{
+			"Tag":       tag,
+			"IsArchive": true,
+		}
+		err := engine.SaveAsHTML(fileName, "tag.html", data)
+		if err != nil {
+			log.Println(err)
+		} else {
+			log.Printf("generated: tags/%s.html\n", tag.Slug)
 		}
 	}
 }
@@ -201,6 +244,7 @@ func compileTemplate(templateName string) *template.Template {
 		"join": func(a []string, sep string) string {
 			return strings.Join(a, sep)
 		},
+		"slugify": util.Slugify,
 	}
 
 	t = template.Must(t.Funcs(funcMap).ParseGlob("theme/common/*.html"))

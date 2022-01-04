@@ -6,7 +6,11 @@ func main() {
 	engine := engine.New()
 
 	engine.ScanContent()
-	engine.GenerateSingluarPages()
+
 	engine.GenerateIndexPage()
+	engine.GenerateTagIndexPage()
+	engine.GenerateSingluarPages()
+	engine.GenerateTagPages()
+
 	engine.CopyStaticFiles()
 }

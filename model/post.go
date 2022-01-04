@@ -14,6 +14,21 @@ type Post struct {
 	Tags    []string
 }
 
+type Posts []Post
+
+func (posts Posts) FindByTag(tag string) Posts {
+	var foundPosts Posts
+	for _, post := range posts {
+		for _, t := range post.Tags {
+			if t == tag {
+				foundPosts = append(foundPosts, post)
+			}
+		}
+	}
+
+	return foundPosts
+}
+
 type ByDate []Post
 
 type FrontMatter struct {
@@ -23,14 +38,7 @@ type FrontMatter struct {
 }
 
 func (post *Post) Permarlink() string {
-	return fmt.Sprintf("%s/%s.html", post.Type, post.Slug)
-}
-
-func (post *Post) FormattedDate(format string) string {
-	if format == "" {
-		format = "02-01-2006"
-	}
-	return post.Date.Format(format)
+	return fmt.Sprintf("/%s/%s.html", post.Type, post.Slug)
 }
 
 func (d ByDate) Len() int {

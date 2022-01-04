@@ -1,10 +1,18 @@
 {{define "extra_head"}}{{end}}
 {{define "content"}}
 <main class="container">
-    <a href="/" class="font-mono">cd ..</a>
+    <a href="/" class="font-mono">cd $HOME</a>
     <div>
         <h1>{{.Post.Title}}</h1>
         <div>{{safe_html .Post.Content}}</div>
+    </div>
+    <div class="post-meta">
+        <div class="mb-2">{{.Post.Date.Format "Jan 2, 2006"}}</div>
+        <nav class="post-tags">
+            {{range .Post.Tags}}
+            <a href="/tags/{{slugify .}}">{{.}}</a>
+            {{end}}
+        </nav>
     </div>
 </main>
 {{end}}

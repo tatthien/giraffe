@@ -1,0 +1,17 @@
+{{define "extra_head"}}{{end}}
+{{define "content"}}
+<main class="container">
+    <h1>Tags</h1>
+    <nav>
+        {{range .Tags}}
+        <div>
+            <a href="{{.Permalink}}">{{.Name}}</a>
+        </div>
+        {{end}}
+    </nav>
+</main>
+{{end}}
+
+{{define "extra_footer"}}{{end}}
+
+{{template "base.html" .}}

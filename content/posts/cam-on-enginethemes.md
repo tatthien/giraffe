@@ -1,7 +1,7 @@
 ---
 title: Cảm ơn EngineThemes
 date: 2017-05-31T14:23:39.239Z
-tags: work, enginethemes
+tags: work,enginethemes
 ---
 
 EngineThemes (ET) là môi trường làm việc chuyên nghiệp đầu tiên của mình. Đây là nơi giúp mình học hỏi và kinh nghiệm rất nhiều thứ, cũng là nơi mình được làm quen với nhiều người mà cho tới thời điểm này có thể phần nào mối liên hệ đã vượt ngoài giới hạn của công việc.

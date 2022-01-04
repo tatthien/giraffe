@@ -1,7 +1,7 @@
 ---
 title: Cấu hình Golang web application với Nginx
 date: 2016-11-09T09:08:00.698Z
-tags: golang, nginx, web
+tags: golang,nginx,web
 ---
 
 Mấy bữa nay mình có code một web app bằng Golang để cung cấp API (phục vụ cho mục đích cá nhân). Mọi thứ ở local đã xong, việc mình cần làm là đưa lên host để có thể sử dụng live được.
