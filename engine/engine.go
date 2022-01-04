@@ -118,8 +118,6 @@ func (engine *AppEngine) GenerateIndexPage() {
 	err := engine.SaveAsHTML("index.html", "index.html", data)
 	if err != nil {
 		log.Println(err)
-	} else {
-		log.Println("generated: index.html")
 	}
 }
 
@@ -133,8 +131,6 @@ func (engine *AppEngine) GenerateSingluarPages() {
 		err := engine.SaveAsHTML(fileName, "single.html", data)
 		if err != nil {
 			log.Println(err)
-		} else {
-			log.Printf("generated: %s/%s.html\n", post.Type, post.Slug)
 		}
 	}
 }
@@ -160,8 +156,6 @@ func (engine *AppEngine) GenerateTagPages() {
 		err := engine.SaveAsHTML(fileName, "tag.html", data)
 		if err != nil {
 			log.Println(err)
-		} else {
-			log.Printf("generated: tags/%s.html\n", tag.Slug)
 		}
 	}
 }

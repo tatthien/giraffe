@@ -1,6 +1,10 @@
 package main
 
-import "github.com/tatthien/giraffe/engine"
+import (
+	"fmt"
+
+	"github.com/tatthien/giraffe/engine"
+)
 
 func main() {
 	engine := engine.New()
@@ -13,4 +17,7 @@ func main() {
 	engine.GenerateTagPages()
 
 	engine.CopyStaticFiles()
+
+	fmt.Printf("Generated: %d posts\n", len(engine.Posts))
+	fmt.Printf("Generated: %d tags\n", len(engine.Tags))
 }
