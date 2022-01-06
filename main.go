@@ -1,23 +1,25 @@
 package main
 
 import (
-	"fmt"
+	"flag"
+	"log"
 
-	"github.com/tatthien/giraffe/engine"
+	"github.com/tatthien/giraffe/cmd"
 )
 
 func main() {
-	engine := engine.New()
+	flag.Parse()
 
-	engine.ScanContent()
+	if flag.NArg() == 0 {
+		cmd.Build()
+		return
+	}
 
-	engine.GenerateIndexPage()
-	engine.GenerateTagIndexPage()
-	engine.GenerateSingluarPages()
-	engine.GenerateTagPages()
-
-	engine.CopyStaticFiles()
-
-	fmt.Printf("Generated: %d posts\n", len(engine.Posts))
-	fmt.Printf("Generated: %d tags\n", len(engine.Tags))
+	command := flag.Arg(0)
+	switch command {
+	case "serve":
+		cmd.Serve()
+	default:
+		log.Println("Unknown command:", command)
+	}
 }
