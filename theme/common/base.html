@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/app.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png">
 
     {{ if .IsSingular }}
     <title>{{.Post.Title}} | {{.Site.Title}}</title>
@@ -22,6 +23,19 @@
 </head>
 
 <body>
+    {{if ne .IsHome true}}
+    <div class="container-fluid">
+        <a href="/">
+            <svg width="40" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="64" height="64" fill="#151515" />
+                <path fill-rule="evenodd" clip-rule="evenodd"
+                    d="M12 12H25.3333H38.6667V25.3333V38.6667H52V52H38.6667H25.3333V38.6667V25.3333H12V12Z"
+                    fill="white" />
+            </svg>
+        </a>
+    </div>
+    {{end}}
+
     {{template "content" .}}
 
     <footer class="site-footer">
