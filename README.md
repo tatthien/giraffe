@@ -17,6 +17,13 @@ For non-Go users.
 curl -sf https://gobinaries.com/tatthien/giraffe | sh
 ```
 
+## Usage
+
+There are only 2 commands:
+
+- `giraffe`: Build everything into `dist` folder.
+- `giraffe serve`: Serving the site at `localhost:3333` for preview. It also rebuilds the site when a file in `contents` and `theme` changes.
+
 ## How to write posts?
 
 All content should be localed in `/content/{post-type}` folder, in markdown format. Each posts should have frontmatter and content:
