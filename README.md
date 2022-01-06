@@ -4,6 +4,19 @@ I want to start 2022 by writing a static site generator that is used by my perso
 
 About the name "Giraffe" it's because of my son. He really like giraffes.
 
+
+## Install
+
+```
+go get github.com/tatthien/giraffe
+```
+
+For non-Go users.
+
+```
+curl -sf https://gobinaries.com/tatthien/giraffe | sh
+```
+
 ## How to write posts?
 
 All content should be localed in `/content/{post-type}` folder, in markdown format. Each posts should have frontmatter and content:
