@@ -4,8 +4,8 @@ clean:
 	rm -rf ./bin
 
 build: clean
-	GOOS=linux GOARCH=amd64 go build -o bin/giraffe.linux-amd64 main.go
-	GOOS=darwin GOARCH=amd64 go build -o bin/giraffe.darwin-amd64 main.go
+	GOOS=linux GOARCH=amd64 go build -ldflags="-w -s" -a -o  bin/giraffe.linux-amd64 main.go 
+	GOOS=darwin GOARCH=amd64 go build -ldflags="-w -s" -a -o  bin/giraffe.darwin-amd64 main.go 
 
 # Example: make release V=0.0.0
 release:
