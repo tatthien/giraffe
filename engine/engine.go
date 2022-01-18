@@ -94,6 +94,7 @@ func (engine *AppEngine) ScanContent() {
 	// Retrieve tags
 	for _, post := range engine.Posts {
 		for _, t := range post.Tags {
+			t = strings.TrimSpace(t)
 			tag := engine.Tags.Find(t)
 
 			if tag.Name == "" {
@@ -136,9 +137,12 @@ func (engine *AppEngine) GenerateSingluarPages() {
 }
 
 func (engine *AppEngine) GenerateTagIndexPage() {
+	sortedTags := engine.Tags
+	sort.Sort(model.TagsByName(sortedTags))
+
 	// Generate tags.html
 	err := engine.SaveAsHTML("tags/index.html", "tags.html", map[string]interface{}{
-		"Tags": engine.Tags,
+		"Tags": sortedTags,
 	})
 	if err != nil {
 		log.Println(err)

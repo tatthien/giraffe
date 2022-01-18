@@ -28,3 +28,17 @@ func (tags Tags) Find(key string) Tag {
 
 	return Tag{}
 }
+
+type TagsByName []Tag
+
+func (tags TagsByName) Len() int {
+	return len(tags)
+}
+
+func (tags TagsByName) Less(i, j int) bool {
+	return tags[i].Name < tags[j].Name
+}
+
+func (tags TagsByName) Swap(i, j int) {
+	tags[i], tags[j] = tags[j], tags[i]
+}
