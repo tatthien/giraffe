@@ -79,6 +79,11 @@ func (engine *AppEngine) ScanContent() {
 		post.Title = fm.Title
 		post.Date = fm.Date
 		post.Tags = fm.Tags
+		if fm.Draft {
+			post.Status = model.PostStatusDraft
+		} else {
+			post.Status = model.PostStatusPublished
+		}
 
 		// @TODO: Move this to util
 		var buf bytes.Buffer
@@ -88,7 +93,9 @@ func (engine *AppEngine) ScanContent() {
 		}
 		post.Content = buf.String()
 
-		engine.Posts = append(engine.Posts, post)
+		if post.Status == model.PostStatusPublished {
+			engine.Posts = append(engine.Posts, post)
+		}
 	}
 
 	// Retrieve tags

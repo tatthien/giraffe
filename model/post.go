@@ -5,6 +5,9 @@ import (
 	"time"
 )
 
+const PostStatusDraft = "draft"
+const PostStatusPublished = "published"
+
 type Post struct {
 	Title   string
 	Date    time.Time
@@ -12,6 +15,7 @@ type Post struct {
 	Slug    string
 	Type    string
 	Tags    []string
+	Status  string
 }
 
 type Posts []Post
@@ -35,6 +39,7 @@ type FrontMatter struct {
 	Title string    `mapstructure:"title"`
 	Date  time.Time `mapstructure:"date"`
 	Tags  []string  `mapstructure:"tags"`
+	Draft bool      `mapstructure:"draft"`
 }
 
 func (post *Post) Permarlink() string {
