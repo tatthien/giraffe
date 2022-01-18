@@ -53,5 +53,12 @@ func GetFrontMatter(content string) (model.FrontMatter, string) {
 		log.Println(err)
 	}
 
+	// Trim tags
+	if fm.Tags != nil {
+		for i, tag := range fm.Tags {
+			fm.Tags[i] = strings.TrimSpace(tag)
+		}
+	}
+
 	return fm, body
 }

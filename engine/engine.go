@@ -101,7 +101,6 @@ func (engine *AppEngine) ScanContent() {
 	// Retrieve tags
 	for _, post := range engine.Posts {
 		for _, t := range post.Tags {
-			t = strings.TrimSpace(t)
 			tag := engine.Tags.Find(t)
 
 			if tag.Name == "" {
