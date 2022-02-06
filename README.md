@@ -40,3 +40,9 @@ description: <string>
 ```
 
 Each folder inside `content` is corresponding to a post type. For example, `/content/posts/` is a folder that contains all `posts`.
+
+## License
+
+[MIT](https://opensource.org/licenses/MIT)
+
+Copyright (c) 2022-present, Thien Nguyen
