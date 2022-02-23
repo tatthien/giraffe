@@ -175,12 +175,40 @@ func (engine *AppEngine) GenerateRSS() {
 	sort.Sort(model.ByDate(sortedPosts))
 	data := map[string]interface{}{
 		"Posts": sortedPosts,
-		"Site":  engine.SiteConfig,
 	}
-	err := engine.SaveAsHTML("rss.xml", "rss.xml", data)
+
+	rssTemplate := `
+	{{ $baseURL := .Site.BaseURL }}
+	<rss version="2.0">
+	<channel>
+		<title>{{ .Site.Title }}</title>
+		<link>{{ $baseURL }}</link>
+		<description>{{ .Site.Description }}</description>
+		{{ range .Posts }}
+		{{ if eq .Type "posts"}}
+		<item>
+			<title>{{ .Title }}</title>
+			<link>{{ $baseURL }}{{ .Permarlink }}</link>
+			<description></description>
+			<pubDate>{{ .Date.Format "2006-01-02T15:04:05" }}</pubDate>
+		</item>
+		{{ end }}
+		{{ end }}
+	</channel>
+	</rss>
+	`
+
+	t, err := template.New("").Parse(rssTemplate)
 	if err != nil {
-		log.Println(err)
+		log.Fatalln(err)
 	}
+
+	f, err := os.Create(engine.DistDir + "/rss.xml")
+	if err != nil {
+		log.Fatalln(err)
+	}
+
+	t.Execute(f, data)
 }
 
 func (engine *AppEngine) SaveAsHTML(fileName, templateName string, data map[string]interface{}) error {
