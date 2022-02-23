@@ -1,0 +1,18 @@
+{{ $baseURL := .Site.BaseURL }}
+<rss version="2.0">
+<channel>
+    <title>{{ .Site.Title }}</title>
+    <link>{{ $baseURL }}</link>
+    <description>{{ .Site.Description }}</description>
+    {{ range .Posts }}
+    {{ if eq .Type "posts"}}
+    <item>
+        <title>{{ .Title }}</title>
+        <link>{{ $baseURL }}{{ .Permarlink }}</link>
+        <description></description>
+        <pubDate>{{ .Date.Format "2006-01-02T15:04:05" }}</pubDate>
+    </item>
+    {{ end }}
+    {{ end }}
+</channel>
+</rss>

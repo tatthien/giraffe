@@ -5,6 +5,7 @@ import (
 )
 
 type SiteConfig struct {
+	BaseURL     string `mapstructure:"baseURL"`
 	Title       string `mapstructure:"title"`
 	Description string `mapstructure:"description"`
 }

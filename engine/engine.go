@@ -170,6 +170,19 @@ func (engine *AppEngine) GenerateTagPages() {
 	}
 }
 
+func (engine *AppEngine) GenerateRSS() {
+	sortedPosts := engine.Posts
+	sort.Sort(model.ByDate(sortedPosts))
+	data := map[string]interface{}{
+		"Posts": sortedPosts,
+		"Site":  engine.SiteConfig,
+	}
+	err := engine.SaveAsHTML("rss.xml", "rss.xml", data)
+	if err != nil {
+		log.Println(err)
+	}
+}
+
 func (engine *AppEngine) SaveAsHTML(fileName, templateName string, data map[string]interface{}) error {
 	tpl := compileTemplate(templateName)
 
