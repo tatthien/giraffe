@@ -175,6 +175,7 @@ func (engine *AppEngine) GenerateRSS() {
 	sort.Sort(model.ByDate(sortedPosts))
 	data := map[string]interface{}{
 		"Posts": sortedPosts,
+		"Site":  engine.SiteConfig,
 	}
 
 	rssTemplate := `
