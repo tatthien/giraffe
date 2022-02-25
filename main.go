@@ -2,10 +2,13 @@ package main
 
 import (
 	"flag"
+	"fmt"
 	"log"
 
 	"github.com/tatthien/giraffe/cmd"
 )
+
+const version = "v0.3"
 
 func main() {
 	flag.Parse()
@@ -19,6 +22,8 @@ func main() {
 	switch command {
 	case "serve":
 		cmd.Serve()
+	case "version":
+		fmt.Println(version)
 	default:
 		log.Println("Unknown command:", command)
 	}
