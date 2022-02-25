@@ -34,12 +34,13 @@ title: <string>
 date: YYYY-MM-DD
 tags: <string>, <string>
 description: <string>
+draft: false <boolean> # This is the item status. Set true if you don't want to publish the item.
 ---
 
 <your-content>
 ```
 
-Each folder inside `content` is corresponding to a post type. For example, `/content/posts/` is a folder that contains all `posts`.
+Each folder inside `content` is corresponding to a post type. For example, the folder `/content/posts/` contains all `posts`.
 
 ## License
 
