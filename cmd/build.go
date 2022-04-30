@@ -16,6 +16,7 @@ func Build() {
 	engine.GenerateSingluarPages()
 	engine.GenerateTagPages()
 	engine.GenerateRSS()
+	engine.GeneratePostTypeArchive()
 
 	engine.CopyStaticFiles()
 

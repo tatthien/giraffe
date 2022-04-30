@@ -24,6 +24,7 @@ type AppEngine struct {
 	TemplateDir string
 	Posts       model.Posts
 	Tags        model.Tags
+	PostTypes   []string
 }
 
 func New() *AppEngine {
@@ -79,10 +80,16 @@ func (engine *AppEngine) ScanContent() {
 		post.Title = fm.Title
 		post.Date = fm.Date
 		post.Tags = fm.Tags
+
 		if fm.Draft {
 			post.Status = model.PostStatusDraft
 		} else {
 			post.Status = model.PostStatusPublished
+		}
+
+		// Collect all post types
+		if !util.SliceContains(engine.PostTypes, post.Type) {
+			engine.PostTypes = append(engine.PostTypes, post.Type)
 		}
 
 		// @TODO: Move this to util
@@ -210,6 +217,31 @@ func (engine *AppEngine) GenerateRSS() {
 	}
 
 	t.Execute(f, data)
+}
+
+func (engine *AppEngine) GeneratePostTypeArchive() {
+	for _, postType := range engine.PostTypes {
+		var posts model.Posts
+		for _, post := range engine.Posts {
+			if post.Type == postType {
+				posts = append(posts, post)
+			}
+		}
+
+		data := map[string]interface{}{
+			"Posts": posts,
+		}
+
+		templateName := postType + ".html"
+		if _, err := os.Stat("theme/" + templateName); os.IsNotExist(err) {
+			templateName = "post-type.html"
+		}
+
+		err := engine.SaveAsHTML(postType+"/index.html", templateName, data)
+		if err != nil {
+			log.Println(err)
+		}
+	}
 }
 
 func (engine *AppEngine) SaveAsHTML(fileName, templateName string, data map[string]interface{}) error {

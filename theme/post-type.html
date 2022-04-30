@@ -1,0 +1,25 @@
+{{define "extra_head"}}{{end}}
+{{define "content"}}
+<main class="container">
+  <section id="posts" class="container">
+    <ul class="post-list">
+      {{ range .Posts }}
+      <li class="post-item">
+        <a href="{{ .Permarlink }}">{{ .Title }}</a>
+        <div>
+          <span class="post-date">{{ .Date.Format "Jan 02, 2006" }}</span>
+
+          <span class="post-tags">
+            {{ join .Tags ", " }}
+          </span>
+        </div>
+      </li>
+      {{ end }}
+    </ul>
+  </section>
+</main>
+{{end}}
+
+{{define "extra_footer"}}{{end}}
+
+{{template "base.html" .}}
