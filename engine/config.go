@@ -8,6 +8,7 @@ type SiteConfig struct {
 	BaseURL     string `mapstructure:"baseURL"`
 	Title       string `mapstructure:"title"`
 	Description string `mapstructure:"description"`
+	Port        string `mapstructure:"port"`
 }
 
 func LoadConfig(path string) (SiteConfig, error) {

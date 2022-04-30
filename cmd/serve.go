@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/fsnotify/fsnotify"
+	"github.com/tatthien/giraffe/engine"
 )
 
 var watcher *fsnotify.Watcher
@@ -18,16 +19,26 @@ func Serve() {
 	Build()
 
 	// Start the server
+	config, err := engine.LoadConfig(".")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	port := "3333"
+	if config.Port != "" {
+		port = config.Port
+	}
+
 	go func() {
 		mux := http.NewServeMux()
 		mux.Handle("/", http.FileServer(http.Dir("dist")))
 
 		server := http.Server{
-			Addr:    ":3333",
+			Addr:    ":" + port,
 			Handler: mux,
 		}
 
-		fmt.Println("Serving on http://localhost:3333")
+		fmt.Println("Serving on http://localhost:" + port)
 		log.Fatal(server.ListenAndServe())
 	}()
 
