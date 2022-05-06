@@ -15,6 +15,9 @@ import (
 	"github.com/tatthien/giraffe/model"
 	"github.com/tatthien/giraffe/util"
 	"github.com/yuin/goldmark"
+	"github.com/yuin/goldmark/extension"
+	"github.com/yuin/goldmark/parser"
+	"github.com/yuin/goldmark/renderer/html"
 )
 
 type AppEngine struct {
@@ -94,7 +97,23 @@ func (engine *AppEngine) ScanContent() {
 
 		// @TODO: Move this to util
 		var buf bytes.Buffer
-		err = goldmark.Convert([]byte(body), &buf)
+		md := goldmark.New(
+			goldmark.WithExtensions(
+				extension.Table,
+				extension.Strikethrough,
+				extension.Linkify,
+				extension.Footnote,
+				extension.TaskList,
+			),
+			goldmark.WithParserOptions(
+				parser.WithAutoHeadingID(),
+			),
+			goldmark.WithRendererOptions(
+				html.WithHardWraps(),
+				html.WithUnsafe(),
+			),
+		)
+		err = md.Convert([]byte(body), &buf)
 		if err != nil {
 			log.Println(err)
 		}
