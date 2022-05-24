@@ -18,6 +18,20 @@ curl -sf https://gobinaries.com/tatthien/giraffe | sh
 
 ## Commands
 
+**`giraffe help`**: Print the usage guide.
+
+```bash
+$ giraffe help
+Giraffe: An opinionated static site generator
+
+Usage: giraffe [command] [arguments]
+
+Available commands:
+  serve        Serve the site
+  new [path]   Create new content for your site
+  version      Print the version number of Giraffe
+```
+
 **`giraffe`**: Build everything into `dist` folder.
 
 Sample output:
