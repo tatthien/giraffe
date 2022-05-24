@@ -154,7 +154,7 @@ func (engine *AppEngine) GenerateIndexPage() {
 	}
 }
 
-func (engine *AppEngine) GenerateSingluarPages() {
+func (engine *AppEngine) GenerateSingularPages() {
 	for _, post := range engine.Posts {
 		fileName := fmt.Sprintf("%s/%s.html", post.Type, post.Slug)
 		data := map[string]interface{}{

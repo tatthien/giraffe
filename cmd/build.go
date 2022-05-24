@@ -16,7 +16,7 @@ func Build() {
 	engine.ScanContent()
 	engine.GenerateIndexPage()
 	engine.GenerateTagIndexPage()
-	engine.GenerateSingluarPages()
+	engine.GenerateSingularPages()
 	engine.GenerateTagPages()
 	engine.GenerateRSS()
 	engine.GeneratePostTypeArchive()
