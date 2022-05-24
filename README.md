@@ -18,9 +18,45 @@ curl -sf https://gobinaries.com/tatthien/giraffe | sh
 
 ## Usage
 
-- `giraffe`: Build everything into `dist` folder.
-- `giraffe serve`: Serving the site at `localhost:3333` for preview. It also rebuilds the site when a file in `contents` and `theme` changes.
-- `giraffe version`: Show the latest version.
+`giraffe`: Build everything into `dist` folder.
+
+Sample output:
+
+```bash
+$ giraffe
+
+Start building site...
+
+  Content        | Total
+-----------------+--------
+  Pages          | 11
+  Tags           | 14
+  Post types     | 2
+
+Build time 37.167845ms
+```
+
+`giraffe serve`: Serving the site at `localhost:3333` for preview (`3333` is the default port, you can change it in `config.yaml`). It also rebuilds the site when a file in `contents` and `theme` changes.
+
+`giraffe version`: Show the latest version.
+
+Sample output:
+
+```bash
+$ giraffe version
+v0.6.0
+```
+
+## Configuration
+
+There are some options that you can change in `config.yaml`.
+
+```yaml
+baseURL: <site base url>
+title: <site title>
+description: <site description>
+port: <server port>
+```
 
 ## How to write posts?
 
