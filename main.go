@@ -27,6 +27,8 @@ func main() {
 		fmt.Println(version)
 	case "new":
 		cmd.New(flag.Arg(1))
+	case "help":
+		cmd.Help()
 	default:
 		log.Println("Unknown command:", command)
 	}
