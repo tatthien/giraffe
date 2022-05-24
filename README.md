@@ -16,9 +16,9 @@ For non-Go users.
 curl -sf https://gobinaries.com/tatthien/giraffe | sh
 ```
 
-## Usage
+## Commands
 
-`giraffe`: Build everything into `dist` folder.
+**`giraffe`**: Build everything into `dist` folder.
 
 Sample output:
 
@@ -36,9 +36,16 @@ Start building site...
 Build time 37.167845ms
 ```
 
-`giraffe serve`: Serving the site at `localhost:3333` for preview (`3333` is the default port, you can change it in `config.yaml`). It also rebuilds the site when a file in `contents` and `theme` changes.
+**`giraffe serve`**: Serving the site at `localhost:3333` for preview (:3333 is the default port, you can change it in `config.yaml`). It also rebuilds the site when a file in `contents` and `theme` changes.
 
-`giraffe version`: Show the latest version.
+**`giraffe new [path]`**: Quickly create a new markdown file insert the `content` directory.
+
+```bash
+# This command will create a new file inside /content/posts and automatically set the date.
+$ giraffe new posts/welcome-to-girrafe.md
+```
+
+**`giraffe version`**: Show the latest version.
 
 Sample output:
 
@@ -60,7 +67,7 @@ port: <server port>
 
 ## How to write posts?
 
-All content should be localed in `/content/{post-type}` folder, in markdown format. Each posts should have frontmatter and content:
+All content should be localed in `/content/>post-type>` folder, in markdown format. Each post should have frontmatter and content:
 
 ```
 ---
