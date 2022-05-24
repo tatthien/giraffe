@@ -19,11 +19,14 @@ func main() {
 	}
 
 	command := flag.Arg(0)
+
 	switch command {
 	case "serve":
 		cmd.Serve()
 	case "version":
 		fmt.Println(version)
+	case "new":
+		cmd.New(flag.Arg(1))
 	default:
 		log.Println("Unknown command:", command)
 	}
