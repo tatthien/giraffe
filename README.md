@@ -1,5 +1,7 @@
 # Giraffe: An opinionated static site generator
 
+![build badge](https://img.shields.io/github/workflow/status/tatthien/giraffe/Test)
+
 I want to start 2022 by writing a static site generator that is used by my personal website (https://thien.dev)
 
 About the name "Giraffe" it's because of my son. He really like giraffes.
