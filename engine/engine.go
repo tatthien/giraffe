@@ -1,7 +1,6 @@
 package engine
 
 import (
-	"bytes"
 	"fmt"
 	"html/template"
 	"io"
@@ -12,12 +11,9 @@ import (
 	"sort"
 	"strings"
 
+	"github.com/tatthien/giraffe/markdown"
 	"github.com/tatthien/giraffe/model"
 	"github.com/tatthien/giraffe/util"
-	"github.com/yuin/goldmark"
-	"github.com/yuin/goldmark/extension"
-	"github.com/yuin/goldmark/parser"
-	"github.com/yuin/goldmark/renderer/html"
 )
 
 type AppEngine struct {
@@ -95,29 +91,10 @@ func (engine *AppEngine) ScanContent() {
 			engine.PostTypes = append(engine.PostTypes, post.Type)
 		}
 
-		// @TODO: Move this to util
-		var buf bytes.Buffer
-		md := goldmark.New(
-			goldmark.WithExtensions(
-				extension.Table,
-				extension.Strikethrough,
-				extension.Linkify,
-				extension.Footnote,
-				extension.TaskList,
-			),
-			goldmark.WithParserOptions(
-				parser.WithAutoHeadingID(),
-			),
-			goldmark.WithRendererOptions(
-				html.WithHardWraps(),
-				html.WithUnsafe(),
-			),
-		)
-		err = md.Convert([]byte(body), &buf)
+		post.Content, err = markdown.Render(body)
 		if err != nil {
 			log.Println(err)
 		}
-		post.Content = buf.String()
 
 		if post.Status == model.PostStatusPublished {
 			engine.Posts = append(engine.Posts, post)
