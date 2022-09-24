@@ -8,7 +8,7 @@ import (
 	"github.com/tatthien/giraffe/cmd"
 )
 
-const version = "v0.8.0"
+const version = "0.9.0"
 
 func main() {
 	flag.Parse()
@@ -24,7 +24,7 @@ func main() {
 	case "serve":
 		cmd.Serve()
 	case "version":
-		fmt.Println(version)
+		fmt.Printf("giraffe version: v%s\n", version)
 	case "new":
 		cmd.New(flag.Arg(1))
 	case "help":
