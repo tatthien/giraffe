@@ -29,6 +29,8 @@ func main() {
 		cmd.New(flag.Arg(1))
 	case "help":
 		cmd.Help()
+	case "build":
+		cmd.Build()
 	default:
 		log.Println("Unknown command:", command)
 	}
