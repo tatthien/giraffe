@@ -8,15 +8,13 @@ About the name "Giraffe" it's because of my son. He really like giraffes.
 
 ## Install
 
-```
-go get github.com/tatthien/giraffe
-```
-
-For non-Go users.
+Via `go install` with go 1.16 or higher:
 
 ```
-curl -sf https://gobinaries.com/tatthien/giraffe | sh
+go install github.com/tatthien/giraffe@latest
 ```
+
+Or download binary files from [Releases](https://github.com/tatthien/giraffe/releases) page  
 
 ## Commands
 
@@ -24,32 +22,28 @@ curl -sf https://gobinaries.com/tatthien/giraffe | sh
 
 ```bash
 $ giraffe help
+
 Giraffe: An opinionated static site generator
 
 Usage: giraffe [command] [arguments]
 
 Available commands:
-  serve        Serve the site
-  new [path]   Create new content for your site
-  version      Print the version number of Giraffe
+        serve           start a server, watch files changed and rebuild
+        build           generate static files
+        new [path]      create a new markdown file
+        version         print the cli version
 ```
 
 **`giraffe`**: Build everything into `dist` folder.
 
-Sample output:
-
 ```bash
 $ giraffe
 
-Start building site...
-
-  Content        | Total
------------------+--------
-  Pages          | 11
-  Tags           | 14
-  Post types     | 2
-
-Build time 37.167845ms
+CONTENT         TOTAL
+Tags            15
+Post types      3
+Pages           18
+Build time      105.455465ms
 ```
 
 **`giraffe serve`**: Serving the site at `localhost:3333` for preview (:3333 is the default port, you can change it in `config.yaml`). It also rebuilds the site when a file in `contents` and `theme` changes.
@@ -67,7 +61,8 @@ Sample output:
 
 ```bash
 $ giraffe version
-v0.6.0
+
+giraffe version: v0.9.0
 ```
 
 ## Configuration
