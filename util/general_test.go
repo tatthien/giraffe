@@ -30,3 +30,32 @@ func TestGenerateSlug(t *testing.T) {
 		require.Equal(t, tc[i].expect, slug)
 	}
 }
+
+func TestSliceContains(t *testing.T) {
+	tc := []struct {
+		slice  []string
+		str    string
+		expect bool
+	}{
+		{
+			[]string{"a", "b", "c"},
+			"a",
+			true,
+		},
+		{
+			[]string{"a", "b", "c"},
+			"d",
+			false,
+		},
+		{
+			[]string{},
+			"",
+			false,
+		},
+	}
+
+	for i := range tc {
+		ok := SliceContains(tc[i].slice, tc[i].str)
+		require.Equal(t, tc[i].expect, ok)
+	}
+}
