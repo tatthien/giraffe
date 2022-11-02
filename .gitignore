@@ -1,4 +1,4 @@
 dist/
 bin/
 content/
-config.yaml
+./config.yaml

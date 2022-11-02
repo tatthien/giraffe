@@ -19,7 +19,7 @@ import (
 type AppEngine struct {
 	SiteConfig  SiteConfig
 	ContentDir  string
-	DistDir     string
+	OutputDir   string
 	TemplateDir string
 	Posts       model.Posts
 	Tags        model.Tags
@@ -27,8 +27,6 @@ type AppEngine struct {
 }
 
 func New() *AppEngine {
-	// Ensure dist directory is exists
-	util.CreateDir("dist")
 
 	// Load config
 	config, err := LoadConfig(".")
@@ -36,10 +34,13 @@ func New() *AppEngine {
 		log.Fatal(err)
 	}
 
+	// Ensure dist directory is exists
+	util.CreateDir(config.OutputDir)
+
 	return &AppEngine{
 		SiteConfig:  config,
-		ContentDir:  "content",
-		DistDir:     "dist",
+		ContentDir:  config.ContentDir,
+		OutputDir:   config.OutputDir,
 		TemplateDir: "theme",
 	}
 }
@@ -207,7 +208,7 @@ func (engine *AppEngine) GenerateRSS() {
 		log.Fatalln(err)
 	}
 
-	f, err := os.Create(engine.DistDir + "/rss.xml")
+	f, err := os.Create(engine.OutputDir + "/rss.xml")
 	if err != nil {
 		log.Fatalln(err)
 	}
@@ -243,7 +244,7 @@ func (engine *AppEngine) GeneratePostTypeArchive() {
 func (engine *AppEngine) SaveAsHTML(fileName, templateName string, data map[string]interface{}) error {
 	tpl := compileTemplate(templateName)
 
-	fullPath := engine.DistDir + "/" + fileName
+	fullPath := engine.OutputDir + "/" + fileName
 
 	err := util.CreateDir(filepath.Dir(fullPath))
 	if err != nil {
