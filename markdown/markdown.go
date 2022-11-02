@@ -10,7 +10,7 @@ import (
 	"github.com/yuin/goldmark/util"
 )
 
-func Render(content string) (string, error) {
+func Render(markdown string) (string, error) {
 	var buf bytes.Buffer
 	md := goldmark.New(
 		goldmark.WithExtensions(
@@ -31,7 +31,7 @@ func Render(content string) (string, error) {
 			html.WithUnsafe(),
 		),
 	)
-	err := md.Convert([]byte(content), &buf)
+	err := md.Convert([]byte(markdown), &buf)
 	if err != nil {
 		return "", err
 	}
