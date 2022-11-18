@@ -79,6 +79,8 @@ baseURL: <site base url>
 title: <site title>
 description: <site description>
 port: <server port>
+content: <content directory path>
+dist: <dist directory path>
 ```
 
 ## How to write posts?
