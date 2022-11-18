@@ -8,7 +8,7 @@ import (
 	"github.com/tatthien/giraffe/cmd"
 )
 
-const version = "0.9.0"
+const version = "0.11.0"
 
 func main() {
 	flag.Parse()
