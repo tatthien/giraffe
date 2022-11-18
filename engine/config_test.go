@@ -9,7 +9,7 @@ import (
 func TestLoadConfig(t *testing.T) {
 	assert := assert.New(t)
 
-	config, err := LoadConfig("./test")
+	config, err := LoadConfig("./testdata")
 	assert.NoError(err)
 	assert.Equal("http://localhost:3333", config.BaseURL)
 	assert.Equal("test title", config.Title)
