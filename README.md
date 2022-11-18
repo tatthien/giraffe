@@ -8,11 +8,20 @@ About the name "Giraffe" it's because of my son. He really like giraffes.
 
 ## Install
 
+Use Homebrew:
+
+```bash
+brew tap tatthien/giraffe # You only need to do this once.
+brew install giraffe
+```
+
+For development build:
+
 ```
 go get github.com/tatthien/giraffe
 ```
 
-For non-Go users.
+For non-Go users:
 
 ```
 curl -sf https://gobinaries.com/tatthien/giraffe | sh
