@@ -258,7 +258,13 @@ func (engine *AppEngine) SaveAsHTML(fileName, templateName string, data map[stri
 	defer f.Close()
 
 	// Add site config as global variable
-	data["Site"] = engine.SiteConfig
+	data["Site"] = map[string]interface{}{
+		"BaseURL":     engine.SiteConfig.BaseURL,
+		"Title":       engine.SiteConfig.Title,
+		"Description": engine.SiteConfig.Description,
+		"Posts":       engine.Posts,
+		"Tags":        engine.Tags,
+	}
 
 	return tpl.ExecuteTemplate(f, templateName, data)
 }
