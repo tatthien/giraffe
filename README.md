@@ -2,7 +2,7 @@
 
 I want to start 2022 by writing a static site generator that is used by my personal website (https://thien.dev)
 
-About the name "Giraffe" it's because of my son. He really like giraffes.
+About the name `Giraffe` it's inspired by my son. He's a fan of giraffes.
 
 ## Install
 
