@@ -80,6 +80,7 @@ func (engine *AppEngine) ScanContent() {
 		post.Title = fm.Title
 		post.Date = fm.Date
 		post.Tags = fm.Tags
+		post.Description = fm.Description
 
 		if fm.Draft {
 			post.Status = model.PostStatusDraft
