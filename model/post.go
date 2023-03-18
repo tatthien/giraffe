@@ -9,13 +9,14 @@ const PostStatusDraft = "draft"
 const PostStatusPublished = "published"
 
 type Post struct {
-	Title   string
-	Date    time.Time
-	Content string
-	Slug    string
-	Type    string
-	Tags    []string
-	Status  string
+	Title       string
+	Date        time.Time
+	Content     string
+	Slug        string
+	Type        string
+	Tags        []string
+	Status      string
+	Description string
 }
 
 type Posts []Post
@@ -36,10 +37,11 @@ func (posts Posts) FindByTag(tag string) Posts {
 type ByDate []Post
 
 type FrontMatter struct {
-	Title string    `mapstructure:"title"`
-	Date  time.Time `mapstructure:"date"`
-	Tags  []string  `mapstructure:"tags"`
-	Draft bool      `mapstructure:"draft"`
+	Title       string    `mapstructure:"title"`
+	Date        time.Time `mapstructure:"date"`
+	Tags        []string  `mapstructure:"tags"`
+	Draft       bool      `mapstructure:"draft"`
+	Description string    `mapstureture:"description"`
 }
 
 func (post *Post) Permarlink() string {

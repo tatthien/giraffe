@@ -49,13 +49,32 @@ func TestGetFrontMatter(t *testing.T) {
 	}{
 		{
 			expect: model.FrontMatter{
-				Title: "Hello",
-				Date:  time.Date(2022, time.January, 1, 0, 0, 0, 0, time.UTC),
-				Tags:  []string{"foo", "bar"},
+				Title:       "Hello",
+				Date:        time.Date(2022, time.January, 1, 0, 0, 0, 0, time.UTC),
+				Tags:        []string{"foo", "bar"},
+				Description: "A test description",
 			},
 			content: `
 ---
 title: Hello
+tags: foo,bar
+date: 2022-01-01T00:00:00.00Z
+description: A test description
+---
+
+Hello world!
+			`,
+		},
+		{
+			expect: model.FrontMatter{
+				Title:       "Missing description",
+				Date:        time.Date(2022, time.January, 1, 0, 0, 0, 0, time.UTC),
+				Tags:        []string{"foo", "bar"},
+				Description: "",
+			},
+			content: `
+---
+title: Missing description
 tags: foo,bar
 date: 2022-01-01T00:00:00.00Z
 ---
@@ -71,5 +90,6 @@ Hello world!
 		require.Equal(t, tc[i].expect.Title, actual.Title)
 		require.Equal(t, tc[i].expect.Tags, actual.Tags)
 		require.WithinDuration(t, tc[i].expect.Date, actual.Date, time.Second)
+		require.Equal(t, tc[i].expect.Description, actual.Description)
 	}
 }
