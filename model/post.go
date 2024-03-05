@@ -37,14 +37,15 @@ func (posts Posts) FindByTag(tag string) Posts {
 type ByDate []Post
 
 type FrontMatter struct {
-	Title       string    `mapstructure:"title"`
-	Date        time.Time `mapstructure:"date"`
-	Tags        []string  `mapstructure:"tags"`
-	Draft       bool      `mapstructure:"draft"`
-	Description string    `mapstureture:"description"`
+	Title         string    `mapstructure:"title"`
+	Date          time.Time `mapstructure:"date"`
+	Tags          []string  `mapstructure:"tags"`
+	Draft         bool      `mapstructure:"draft"`
+	Description   string    `mapstructure:"description"`
+	FeaturedImage string    `mapsstructure:"featuredImage"`
 }
 
-func (post *Post) Permarlink() string {
+func (post *Post) Permalink() string {
 	return fmt.Sprintf("/%s/%s.html", post.Type, post.Slug)
 }
 
