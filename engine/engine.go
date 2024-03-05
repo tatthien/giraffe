@@ -81,6 +81,7 @@ func (engine *AppEngine) ScanContent() {
 		post.Date = fm.Date
 		post.Tags = fm.Tags
 		post.Description = fm.Description
+		post.FeaturedImage = fm.FeaturedImage
 
 		if fm.Draft {
 			post.Status = model.PostStatusDraft

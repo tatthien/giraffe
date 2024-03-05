@@ -9,14 +9,15 @@ const PostStatusDraft = "draft"
 const PostStatusPublished = "published"
 
 type Post struct {
-	Title       string
-	Date        time.Time
-	Content     string
-	Slug        string
-	Type        string
-	Tags        []string
-	Status      string
-	Description string
+	Title         string
+	Date          time.Time
+	Content       string
+	Slug          string
+	Type          string
+	Tags          []string
+	Status        string
+	Description   string
+	FeaturedImage string
 }
 
 type Posts []Post
