@@ -97,9 +97,11 @@ All content should be localed in `/content/>post-type>` folder, in markdown form
 ```
 ---
 title: <string>
+description: <string>
 date: YYYY-MM-DD
 draft: <boolean> # This is the item status. Set ` if you don't want to publish the item.
 tags: <string>, <string>
+featuredImage: <string>
 ---
 
 <your-content>
@@ -109,6 +111,7 @@ Each folder inside `content` is corresponding to a post type. For example:
 
 - The folder `/content/posts/` contains all items which it post type is `posts`
 - The folder `/content/pages` contains all items which it post type is `pages`
+
 ## License
 
 [MIT](https://opensource.org/licenses/MIT)
